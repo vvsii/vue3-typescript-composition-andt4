@@ -1,0 +1,49 @@
+<script setup lang="ts">
+import { RouterView } from "vue-router";
+import WTopMenu from "@/layouts/WTopMenu.vue";
+import WSideMenu from "@/layouts/WSideMenu.vue";
+import { computed, ref } from "vue";
+
+const collapsed = ref<boolean>(false);
+const marginLeft = computed(() => {
+  return collapsed.value ? "80px" : "200px";
+});
+</script>
+<template>
+  <a-layout has-sider>
+    <w-top-menu />
+    <a-layout-sider v-model:collapsed="collapsed" collapsible class="layout-sider">
+      <w-side-menu />
+    </a-layout-sider>
+    <a-layout :style="{ marginLeft: marginLeft }">
+      <a-layout-header :style="{ padding: 0 }" />
+      <a-layout-content class="content">
+        <router-view />
+      </a-layout-content>
+    </a-layout>
+  </a-layout>
+</template>
+<style scoped>
+.site-layout .site-layout-background {
+  background: #fff;
+}
+
+[data-theme="dark"] .site-layout .site-layout-background {
+  background: #141414;
+}
+
+.content {
+  padding: 24px 16px;
+  min-height: calc(100vh - 64px);
+  overflow: initial;
+}
+
+.layout-sider {
+  overflow: auto;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  top: 64px;
+  bottom: 0;
+}
+</style>
