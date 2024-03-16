@@ -93,7 +93,7 @@ const handleLogin = async () => {
           type="primary"
           html-type="submit"
           :disabled="disabled"
-          :loading="loading.state"
+          :loading="loading"
           class="login-form-button"
           >{{ $t("menu.login") }}</a-button
         >
