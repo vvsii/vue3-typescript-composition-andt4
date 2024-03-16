@@ -1,12 +1,12 @@
 import { reactive } from "vue";
 
 const loading = reactive({
-  state: false,
+  value: false,
   start: () => {
-    loading.state = true;
+    loading.value = true;
   },
   finish: () => {
-    loading.state = false;
+    loading.value = false;
   }
 });
 

@@ -114,10 +114,10 @@ onBeforeRouteUpdate(async (to) => {
 <template>
   <a-form :form="form" layout="inline">
     <a-form-item :label="$t('labels.uid')" name="uid">
-      <a-input-number v-model:value="form.uid" :min="259140" :style="{ width: '150px' }" />
+      <a-input-number v-model:value="form.uid" :min="214911" :style="{ width: '150px' }" />
     </a-form-item>
     <a-form-item>
-      <a-button type="primary" @click="handleChange" :loading="loading.state">
+      <a-button type="primary" @click="handleChange" :loading="loading.value">
         {{ t("actions.search") }}
       </a-button>
     </a-form-item>
@@ -127,7 +127,7 @@ onBeforeRouteUpdate(async (to) => {
     :dataSource="values"
     :columns="columns"
     :pagination="pagination"
-    :loading="loading.state"
+    :loading="loading.value"
     @change="handleChange"
   />
 </template>

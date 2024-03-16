@@ -7,6 +7,7 @@ import { useAuthStore } from "@/stores/auth";
 import type { Rule } from "ant-design-vue/es/form/interface";
 import { message, type FormInstance } from "ant-design-vue";
 import { notRange } from "@/utils/validations";
+import loading from "@/common/loading";
 
 const { transfer } = useAuthStore();
 const { t } = useI18n();
@@ -16,7 +17,6 @@ const formState = reactive<LoginForm>({
   name: "",
   password: ""
 });
-const loading = ref<boolean>(false);
 const error = ref<string | undefined>(undefined);
 
 const rules = computed<Record<string, Rule[]>>(() => {
@@ -51,7 +51,7 @@ const disabled = computed(() => {
 });
 
 const handleLogin = async () => {
-  loading.value = true;
+  loading.start();
   try {
     const res = await login(formState);
     if (res.status === 200) {
@@ -64,7 +64,7 @@ const handleLogin = async () => {
   } catch (err) {
     console.error(err);
   }
-  loading.value = false;
+  loading.finish();
 };
 </script>
 <template>
@@ -93,7 +93,7 @@ const handleLogin = async () => {
           type="primary"
           html-type="submit"
           :disabled="disabled"
-          :loading="loading"
+          :loading="loading.value"
           class="login-form-button"
           >{{ $t("menu.login") }}</a-button
         >
